@@ -19,13 +19,14 @@ class FeedParser:
       '1234567': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs',
       'SIR': 'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-si'
       }
-    self.headers = {"x-api-key": os.getenv("MTA_API_KEY")}
+#    self.headers = {"x-api-key": os.getenv("MTA_API_KEY")}
     self.feed = self.combine_feeds()
   
   def get_feed(self, url):
     feed = gtfs_realtime_pb2.FeedMessage()
     # get response from api
-    response = requests.get(url, headers=self.headers)
+#    response = requests.get(url, headers=self.headers)
+    response = requests.get(url)
     # pass response to parser
     feed.ParseFromString(response.content)
     return MessageToDict(feed)
